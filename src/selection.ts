@@ -114,13 +114,13 @@ export function createMathSelectionController(
     const selection = document.getSelection();
     if (
       selection === null ||
-      selection.rangeCount !== 1 ||
-      selection.isCollapsed
+      selection.rangeCount !== 1
     ) {
       return;
     }
 
     const range = selection.getRangeAt(0);
+    if (range.collapsed) return;
     const startSource = sourceForBoundary(
       range.startContainer,
       range.startOffset,
